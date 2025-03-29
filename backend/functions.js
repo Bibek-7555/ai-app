@@ -1,18 +1,23 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getVideo } from "./youtube/getVideo.js";
 import {summarizeVideo} from "./youtube/summarizevideo.js"
+import dotenv from 'dotenv'
 
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-
+dotenv.config(
+    {
+        path: './.env'
+    }
+);
 async function getWeatherData(cityName) {
 
     try {
         console.log("In try block of getWeatherData");
         console.log("In try block of getWeatherData with city:", cityName);
         
-        const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=43eb9963a7e946268ed100909252003&q=${cityName}&aqi=yes`)
+        const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${cityName}&aqi=yes`)
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -31,7 +36,7 @@ async function getWeatherData(cityName) {
     try {
         console.log("In try block of getAQIData");
         
-        const response = await fetch(`https://api.waqi.info/feed/${cityName}/?token=e0c93055d6a8b7f1d4ffb3adf1ed083f0d20b761`)
+        const response = await fetch(`https://api.waqi.info/feed/${cityName}/?token=${process.env.TOKEN}`)
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
