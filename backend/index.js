@@ -9,7 +9,8 @@ dotenv.config(
   }
 );
 
- const genAI = new GoogleGenerativeAI('AIzaSyBWBCAD_OAtRNX48xRdVcafulcd19WlFxc');
+
+ const genAI = new GoogleGenerativeAI(`${process.env.GOOGLE_API_KEY}`);
 
 // async function runMultiTurn() {
 //   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
